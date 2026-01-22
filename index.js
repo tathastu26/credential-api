@@ -46,7 +46,12 @@ function decrypt(text) {
 app.get("/import", (req, res) => {
   const rows = [];
 
-  fs.createReadStream("credentials.csv")
+  const path = require("path");
+
+const csvPath = path.join(__dirname, "credentials.csv");
+
+fs.createReadStream(csvPath)
+
     .pipe(csv())
     .on("data", row => rows.push(row))
     .on("end", async () => {
